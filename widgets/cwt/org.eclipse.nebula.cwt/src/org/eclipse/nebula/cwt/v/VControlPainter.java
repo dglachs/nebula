@@ -12,6 +12,7 @@
 package org.eclipse.nebula.cwt.v;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
@@ -167,14 +168,18 @@ public class VControlPainter implements IControlPainter {
 	}
 	
 	private static void paintText(VControl control, Event e) {
+		Font current = control.font;
 		e.gc.setTextAntialias(SWT.ON);
 
 		if(control.foreground != null && !control.foreground.isDisposed()) {
 			e.gc.setForeground(control.foreground);
 		}
-
+		if (control.font != null && !control.font.isDisposed() ) {
+			e.gc.setFont(control.font);
+		}
 		Point size = e.gc.textExtent(control.text);
 		e.gc.drawText(control.text, (int)getX(control, size.x), (int)getY(control, size.y), true);
+		e.gc.setFont(current);
 	}
 
 	public void dispose() {

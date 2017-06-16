@@ -115,6 +115,10 @@ public abstract class VControl {
 	Color fill;
 	Color foreground;
 	Color background;
+	/**
+	 * allow for customised fonts
+	 */
+	Font font;
 	private Cursor activeCursor;
 	private Cursor inactiveCursor;
 
@@ -435,7 +439,13 @@ public abstract class VControl {
 	public boolean getEnabled() {
 		return hasState(STATE_ENABLED);
 	}
-
+	/**
+	 * Getter for the control's font
+	 * @return
+	 */
+	public Font getFont() {
+		return font;
+	}
 	public Color getForeground() {
 		return foreground;
 	}
@@ -794,7 +804,8 @@ public abstract class VControl {
 	}
 
 	public void setFont(Font font) {
-		// TODO setFont
+		// 
+		this.font = font;
 	}
 
 	public void setForeground(Color color) {
