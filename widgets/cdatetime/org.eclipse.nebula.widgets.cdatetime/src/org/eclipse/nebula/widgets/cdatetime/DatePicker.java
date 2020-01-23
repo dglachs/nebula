@@ -1068,7 +1068,7 @@ class DatePicker extends VPanel {
 		Date date = (Date) button.getData(CDT.Key.Date.name());
 		if (cdt.isSingleSelection()) {
 			if ((stateMask & SWT.CTRL) != 0 && cdt.isSelected(date)) {
-				cdt.setSelection(null);
+				cdt.setSelection((Date)null);
 			} else {
 				cdt.setSelection(date);
 			}

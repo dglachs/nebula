@@ -18,9 +18,10 @@ package org.eclipse.nebula.widgets.cdatetime;
 import java.text.AttributedCharacterIterator;
 import java.text.CharacterIterator;
 import java.text.DateFormat;
+import java.text.DateFormat.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat.Field;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -531,7 +532,7 @@ public class CDateTime extends BaseCombo {
 		b.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				setOpen(false);
-				setSelection(null);
+				setSelection((LocalDate)null);
 				fireSelectionChanged();
 			}
 		});
@@ -1080,6 +1081,13 @@ public class CDateTime extends BaseCombo {
 	 */
 	public Date getSelection() {
 		return hasSelection() ? selection[0] : null;
+	}
+	public LocalDate getLocalDateSelection() {
+		Date d = getSelection(); 
+		if ( d != null ) {
+			return new java.sql.Date(d.getTime()).toLocalDate();
+		}
+		return null;
 	}
 
 	public int getStyle() {
@@ -1779,6 +1787,21 @@ public class CDateTime extends BaseCombo {
 		} else {
 			updateText();
 			updatePicker();
+		}
+	}
+	/**
+	 * Set the selection for this CDateTime to that of the provided
+	 * <code>Date</code> object.<br>
+	 * 
+	 * @param selection
+	 *            the new selection, or null to clear the selection
+	 */
+	public void setSelection(LocalDate selection) {
+		if ( selection!=null) {
+			setSelection(java.sql.Date.valueOf(selection));
+		}
+		else {
+			setSelection((Date)null);
 		}
 	}
 
