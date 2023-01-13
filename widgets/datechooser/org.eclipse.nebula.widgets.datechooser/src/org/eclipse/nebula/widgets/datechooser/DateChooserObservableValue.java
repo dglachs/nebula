@@ -5,7 +5,7 @@ import java.util.Date;
 import org.eclipse.core.databinding.observable.Diffs;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.value.AbstractObservableValue;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.DisplayRealm;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -63,7 +63,7 @@ public class DateChooserObservableValue extends AbstractObservableValue {
 	};
 
 	public DateChooserObservableValue(final DateChooser dateChooser, int updateEventType) {
-		this(SWTObservables.getRealm(dateChooser.getDisplay()), dateChooser, updateEventType);
+		this(DisplayRealm.getRealm(dateChooser.getDisplay()), dateChooser, updateEventType);
 	}
 
 	public DateChooserObservableValue(final Realm realm, final DateChooser dateChooser, int updateEventType) {
